@@ -1,2 +1,1 @@
-# yuki-yaya
-Yuki 壓壓
+# Yuki 壓壓
