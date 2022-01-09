@@ -1,1 +1,1 @@
-pyinstaller --clean --onefile --noconfirm --name "Yuiki 壓壓" main.py
+pyinstaller --clean -i logo.ico --onefile --noconfirm --name Yuki-YaYa main.py

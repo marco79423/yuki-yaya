@@ -6,8 +6,8 @@ from PIL import Image
 
 
 def run():
-    current_folder = _get_current_folder()
-    target_folder = current_folder / 'result'
+    current_folder = get_current_folder()
+    target_folder = current_folder / '輸出'
     target_folder.makedirs_p()
 
     # 改名和轉格式順便移除層性
@@ -32,8 +32,10 @@ def run():
                     break
                 quality -= 5
 
+            print(target_image_path, 'ok')
 
-def _get_current_folder() -> path.Path:
+
+def get_current_folder() -> path.Path:
     """取得檔案當前目錄 (需支援 PyInstaller)"""
     if getattr(sys, 'frozen', False):
         current_folder = path.Path(sys.executable).dirname()
