@@ -38,9 +38,9 @@ def run():
 def get_current_folder() -> path.Path:
     """取得檔案當前目錄 (需支援 PyInstaller)"""
     if getattr(sys, 'frozen', False):
-        current_folder = path.Path(sys.executable).dirname()
+        current_folder = path.Path(sys.executable).dirname().abspath()
     else:
-        current_folder = path.Path(__file__).dirname()
+        current_folder = path.Path(__file__).dirname().abspath()
     return current_folder
 
 
