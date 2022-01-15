@@ -1,5 +1,0 @@
-path==16.2.0
-
-Pillow==9.0.0
-
-pyinstaller==4.7

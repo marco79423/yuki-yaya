@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "yuki-yaya"
+version = "0.1.0"
+description = "簡易壓圖小工具"
+authors = ["兩大類 <marco79423@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8,<3.11"
+path = "^16.3.0"
+Pillow = "^9.0.0"
+
+[tool.poetry.dev-dependencies]
+pyinstaller = "^4.8"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
