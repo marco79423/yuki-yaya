@@ -35,7 +35,7 @@ def run():
                 quality -= 5
 
             print('ok')
-        print('Ya Ya！')
+    print('Ya Ya！')
 
 
 def get_current_folder() -> path.Path:
