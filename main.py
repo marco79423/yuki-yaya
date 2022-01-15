@@ -13,6 +13,8 @@ def run():
     # 改名和轉格式順便移除層性
     for image_path in list_all_image_path_from_folder(current_folder):
         target_image_path = target_folder / f'{image_path.stem}.jpg'
+        print(f'{image_path} to {target_image_path} ...', end=' ')
+
         with Image.open(image_path) as im:
             # JPG 不支援透明，所以要轉為 RGB
             if im.mode in ('RGBA', 'P'):
@@ -32,13 +34,14 @@ def run():
                     break
                 quality -= 5
 
-            print(target_image_path, 'ok')
+            print('ok')
+        print('Ya Ya！')
 
 
 def get_current_folder() -> path.Path:
-    """取得檔案當前目錄 (需支援 PyInstaller)"""
-    if getattr(sys, 'frozen', False):
-        current_folder = path.Path(sys.executable).dirname().abspath()
+    """取得檔案當前目錄 (需支援 Nuitka)"""
+    if '__compiled__' in globals():
+        current_folder = path.Path(sys.argv[0]).dirname().abspath()
     else:
         current_folder = path.Path(__file__).dirname().abspath()
     return current_folder

@@ -1,29 +1,10 @@
 [[package]]
-name = "altgraph"
-version = "0.17.2"
-description = "Python graph (network) package"
+name = "nuitka"
+version = "0.6.19.1"
+description = "Python compiler with full language support and CPython compatibility"
 category = "dev"
 optional = false
 python-versions = "*"
-
-[[package]]
-name = "future"
-version = "0.18.2"
-description = "Clean single-source support for Python 3 and 2"
-category = "dev"
-optional = false
-python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
-
-[[package]]
-name = "macholib"
-version = "1.15.2"
-description = "Mach-O header analysis and editing"
-category = "dev"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-altgraph = ">=0.15"
 
 [[package]]
 name = "path"
@@ -38,17 +19,6 @@ docs = ["sphinx", "jaraco.packaging (>=8.2)", "rst.linker (>=1.9)", "jaraco.tide
 testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-cov", "pytest-enabler (>=1.0.1)", "appdirs", "packaging", "pygments", "pytest-black (>=0.3.7)", "pytest-mypy", "pywin32"]
 
 [[package]]
-name = "pefile"
-version = "2021.9.3"
-description = "Python PE parsing module"
-category = "dev"
-optional = false
-python-versions = ">=3.6.0"
-
-[package.dependencies]
-future = "*"
-
-[[package]]
 name = "pillow"
 version = "9.0.0"
 description = "Python Imaging Library (Fork)"
@@ -56,64 +26,18 @@ category = "main"
 optional = false
 python-versions = ">=3.7"
 
-[[package]]
-name = "pyinstaller"
-version = "4.8"
-description = "PyInstaller bundles a Python application and all its dependencies into a single package."
-category = "dev"
-optional = false
-python-versions = "<3.11,>=3.6"
-
-[package.dependencies]
-altgraph = "*"
-macholib = {version = ">=1.8", markers = "sys_platform == \"darwin\""}
-pefile = {version = ">=2017.8.1", markers = "sys_platform == \"win32\""}
-pyinstaller-hooks-contrib = ">=2020.6"
-pywin32-ctypes = {version = ">=0.2.0", markers = "sys_platform == \"win32\""}
-
-[package.extras]
-encryption = ["tinyaes (>=1.0.0)"]
-hook_testing = ["pytest (>=2.7.3)", "execnet (>=1.5.0)", "psutil"]
-
-[[package]]
-name = "pyinstaller-hooks-contrib"
-version = "2021.5"
-description = "Community maintained hooks for PyInstaller"
-category = "dev"
-optional = false
-python-versions = "*"
-
-[[package]]
-name = "pywin32-ctypes"
-version = "0.2.0"
-description = ""
-category = "dev"
-optional = false
-python-versions = "*"
-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8,<3.11"
-content-hash = "e3ed9dd28b3028e71de6395b3b76eb0327e9bfe9a2d8443612bd18ea5678d5d4"
+content-hash = "3aa282076174f56437c0a9a228f7175450d99a6dea77439647865697d6095236"
 
 [metadata.files]
-altgraph = [
-    {file = "altgraph-0.17.2-py2.py3-none-any.whl", hash = "sha256:743628f2ac6a7c26f5d9223c91ed8ecbba535f506f4b6f558885a8a56a105857"},
-    {file = "altgraph-0.17.2.tar.gz", hash = "sha256:ebf2269361b47d97b3b88e696439f6e4cbc607c17c51feb1754f90fb79839158"},
-]
-future = [
-    {file = "future-0.18.2.tar.gz", hash = "sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"},
-]
-macholib = [
-    {file = "macholib-1.15.2-py2.py3-none-any.whl", hash = "sha256:885613dd02d3e26dbd2b541eb4cc4ce611b841f827c0958ab98656e478b9e6f6"},
-    {file = "macholib-1.15.2.tar.gz", hash = "sha256:1542c41da3600509f91c165cb897e7e54c0e74008bd8da5da7ebbee519d593d2"},
+nuitka = [
+    {file = "Nuitka-0.6.19.1.tar.gz", hash = "sha256:af90a963dbba3f71eb7b99056cfdd1616314ce700ae646395fc7e01296142379"},
 ]
 path = [
     {file = "path-16.3.0-py3-none-any.whl", hash = "sha256:19429b3aa39982d372bd9c0e109fa8e991539ae3ae4151490da18b00586324a7"},
     {file = "path-16.3.0.tar.gz", hash = "sha256:5d8c2063ffade0766e0aa04255f8c0a0fd0eda5fdfb190375871b2f2b2e4afd7"},
-]
-pefile = [
-    {file = "pefile-2021.9.3.tar.gz", hash = "sha256:344a49e40a94e10849f0fe34dddc80f773a12b40675bf2f7be4b8be578bdd94a"},
 ]
 pillow = [
     {file = "Pillow-9.0.0-cp310-cp310-macosx_10_10_universal2.whl", hash = "sha256:113723312215b25c22df1fdf0e2da7a3b9c357a7d24a93ebbe80bfda4f37a8d4"},
@@ -148,25 +72,4 @@ pillow = [
     {file = "Pillow-9.0.0-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6c5439bfb35a89cac50e81c751317faea647b9a3ec11c039900cd6915831064d"},
     {file = "Pillow-9.0.0-pp38-pypy38_pp73-win_amd64.whl", hash = "sha256:95545137fc56ce8c10de646074d242001a112a92de169986abd8c88c27566a05"},
     {file = "Pillow-9.0.0.tar.gz", hash = "sha256:ee6e2963e92762923956fe5d3479b1fdc3b76c83f290aad131a2f98c3df0593e"},
-]
-pyinstaller = [
-    {file = "pyinstaller-4.8-py3-none-macosx_10_13_universal2.whl", hash = "sha256:b0b3a31aa60292469f9595f298e2c147cba29c30edcd92a38fdce27727809625"},
-    {file = "pyinstaller-4.8-py3-none-manylinux2014_aarch64.whl", hash = "sha256:9fbb05f5f67862005234da8c7eac69ef87e086f90e345749260051b031774c52"},
-    {file = "pyinstaller-4.8-py3-none-manylinux2014_i686.whl", hash = "sha256:15d9266d78dc757c103962826e62bce1513825078160be580534ead2ef53087c"},
-    {file = "pyinstaller-4.8-py3-none-manylinux2014_ppc64le.whl", hash = "sha256:5c2fd5f18c0397f3d9160446035556afc7f6446fd88048887fdf46eadf85c5ec"},
-    {file = "pyinstaller-4.8-py3-none-manylinux2014_s390x.whl", hash = "sha256:6f5cdc39fbdec7b2e0c46cc0f5bd0071bb85e592e324bf4e15375c5ff19e55fc"},
-    {file = "pyinstaller-4.8-py3-none-manylinux2014_x86_64.whl", hash = "sha256:4c848720a65a5bd41249bc804d1bd3dd089bb56aef7f1c5e11f774f11e649443"},
-    {file = "pyinstaller-4.8-py3-none-musllinux_1_1_aarch64.whl", hash = "sha256:44783d58ac4cb0a74a4f2180da4dacbe6a7a013a62b3aa10be6082252e296954"},
-    {file = "pyinstaller-4.8-py3-none-musllinux_1_1_x86_64.whl", hash = "sha256:b720853a00bd9547b7d6403d85f23b7f7e451e41bc907673d9fc7f8d9d274594"},
-    {file = "pyinstaller-4.8-py3-none-win32.whl", hash = "sha256:53ed05214dd67624756fe4e82e861857921a79d0392debf8c9f5bb0ba5a479b6"},
-    {file = "pyinstaller-4.8-py3-none-win_amd64.whl", hash = "sha256:f00e1296abac71f3b5bb9fdc2e0d4c079201d62faeeeb894ccadd0616179fee3"},
-    {file = "pyinstaller-4.8.tar.gz", hash = "sha256:7ae868bbcc502832a2c802c84a1dbb9f48b44445c50144c29bfcd7b760140e13"},
-]
-pyinstaller-hooks-contrib = [
-    {file = "pyinstaller-hooks-contrib-2021.5.tar.gz", hash = "sha256:e47b382c209dd2f62ac2ef26cade49148e9a4702ec91958772b0270599f8c2a9"},
-    {file = "pyinstaller_hooks_contrib-2021.5-py2.py3-none-any.whl", hash = "sha256:e658281cbf90570d9bc6a06f4b8f64c28d1076c722f6fb80c02a863bcbb8e7cd"},
-]
-pywin32-ctypes = [
-    {file = "pywin32-ctypes-0.2.0.tar.gz", hash = "sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942"},
-    {file = "pywin32_ctypes-0.2.0-py2.py3-none-any.whl", hash = "sha256:9dc2d991b3479cc2df15930958b674a48a227d5361d413827a4cfd0b5876fc98"},
 ]
