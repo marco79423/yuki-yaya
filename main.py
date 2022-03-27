@@ -18,6 +18,11 @@ def run():
         print(f'{image_path} to {target_image_path} ...', end=' ')
 
         with Image.open(image_path) as im:
+            # 加上 logo 浮水印 (如果有的話)
+            if logo_path.exists():
+                with Image.open(logo_path) as logo_im:
+                    im = add_logo_image(im, logo_im)
+
             # 修改尺寸為一邊最大 1440
             width, height = im.size
             if max(width, height) > 1440:
@@ -30,13 +35,6 @@ def run():
 
             # 調整檔案大小
             save_image_smaller_than(im, target_image_path, 300)
-
-        if logo_path.exists():
-            with Image.open(target_image_path) as im:
-                # 加上 logo 浮水印
-                with Image.open(logo_path) as logo_im:
-                    im = add_logo_image(im, logo_im)
-                save_image_smaller_than(im, target_image_path, 300)
 
         print('ok')
     print('Ya Ya！')
