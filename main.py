@@ -83,10 +83,7 @@ def add_logo_image(image_im, logo_im):
     # 縮放圖片
     logo_size_ratio = min(image_x, image_y) / max(logo_x, logo_y) / 4
     new_logo_size = (int(logo_x * logo_size_ratio), int(logo_y * logo_size_ratio))
-    logo_im = logo_im.resize(new_logo_size, resample=Image.ANTIALIAS)
-
-    # 透明度
-    logo_im.putalpha(150)
+    logo_im = logo_im.resize(new_logo_size, resample=Image.LANCZOS)
 
     logo_x, logo_y = logo_im.size
 
