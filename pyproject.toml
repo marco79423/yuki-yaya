@@ -8,6 +8,7 @@ authors = ["兩大類 <marco79423@gmail.com>"]
 python = "^3.8,<3.11"
 path = "^16.3.0"
 Pillow = "^9.0.0"
+omegaconf = "^2.2.2"
 
 [tool.poetry.dev-dependencies]
 Nuitka = "^0.6.19"

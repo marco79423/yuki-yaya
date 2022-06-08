@@ -4,13 +4,30 @@ import PIL
 import path
 from PIL import Image
 
+from omegaconf import OmegaConf
+
+DEFAULT_CONFIG = {
+    'logo': {
+        'enabled': True,
+        'filepath': 'logo.png',
+    },
+    'output': {
+        'max_size': 300,
+        'max_width': 1440,
+        'max_height': 1440,
+        'to_jpg': True,
+    }
+}
+
 
 def run():
     current_folder = get_current_folder()
+
+    config = load_config()
+
+    # 建立對應的資料夾
     target_folder = current_folder / '輸出'
     target_folder.makedirs_p()
-
-    logo_path = current_folder / '.yuki-yaya' / 'logo.png'
 
     # 改名和轉格式順便移除層性
     for image_path in list_all_image_path_from_folder(current_folder):
@@ -19,14 +36,21 @@ def run():
 
         with Image.open(image_path) as im:
             # 加上 logo 浮水印 (如果有的話)
-            if logo_path.exists():
-                with Image.open(logo_path) as logo_im:
-                    im = add_logo_image(im, logo_im)
+            if config.logo.enabled:
+                logo_path = current_folder / config.logo.filepath
+                if logo_path.exists():
+                    with Image.open(logo_path) as logo_im:
+                        im = add_logo_image(im, logo_im)
 
             # 修改尺寸為一邊最大 1440
             width, height = im.size
-            if max(width, height) > 1440:
-                radio = 1440 / max(width, height)
+            if width > config.output.max_width:
+                radio = config.output.max_width / width
+                im.thumbnail((int(width * radio), int(height * radio)), Image.ANTIALIAS)
+
+            width, height = im.size
+            if height > config.output.max_height:
+                radio = config.output.max_height / height
                 im.thumbnail((int(width * radio), int(height * radio)), Image.ANTIALIAS)
 
             # 因為 JPG 不支援透明，要存為 JPG 就必須所以要轉為 RGB
@@ -34,7 +58,7 @@ def run():
                 im = im.convert("RGB")
 
             # 調整檔案大小
-            save_image_smaller_than(im, target_image_path, 300)
+            save_image_smaller_than(im, target_image_path, config.output.max_size)
 
         print('ok')
     print('Ya Ya！')
@@ -47,6 +71,16 @@ def get_current_folder() -> path.Path:
     else:
         current_folder = path.Path(__file__).dirname().abspath()
     return current_folder
+
+
+def load_config():
+    """取得設定檔"""
+    config = OmegaConf.create(DEFAULT_CONFIG)
+
+    config_file = get_current_folder() / '.yuki-yaya' / 'config.yml'
+    if config_file.exists():
+        config.merge_with(OmegaConf.load(config_file))
+    return config
 
 
 def list_all_image_path_from_folder(folder: path.Path) -> [path.Path]:

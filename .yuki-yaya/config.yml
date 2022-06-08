@@ -1,0 +1,10 @@
+logo:
+  enabled: true
+  filepath: logo.png
+output:
+  max_size: 300  # 單位是 KB
+
+  max_width: 1440
+  max_height: 1440
+
+  to_jpg: true
