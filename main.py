@@ -53,12 +53,12 @@ def generate_output(config, target_format):
             width, height = im.size
             if width > config.output.max_width:
                 radio = config.output.max_width / width
-                im.thumbnail((int(width * radio), int(height * radio)), Image.ANTIALIAS)
+                im.thumbnail((int(width * radio), int(height * radio)), Image.Resampling.LANCZOS)
 
             width, height = im.size
             if height > config.output.max_height:
                 radio = config.output.max_height / height
-                im.thumbnail((int(width * radio), int(height * radio)), Image.ANTIALIAS)
+                im.thumbnail((int(width * radio), int(height * radio)), Image.Resampling.LANCZOS)
 
             # 因為 JPG 不支援透明，要存為 JPG 就必須所以要轉為 RGB
             if target_format == 'jpg' and im.mode in ('RGBA', 'P'):
@@ -71,9 +71,9 @@ def generate_output(config, target_format):
 
 
 def get_current_folder() -> path.Path:
-    """取得檔案當前目錄 (需支援 Nuitka)"""
-    if '__compiled__' in globals():
-        current_folder = path.Path(sys.argv[0]).dirname().abspath()
+    """取得檔案當前目錄 (需支援 PyInstaller)"""
+    if getattr(sys, 'frozen', False):
+        current_folder = path.Path(sys.executable).dirname().abspath()
     else:
         current_folder = path.Path(__file__).dirname().abspath()
     return current_folder

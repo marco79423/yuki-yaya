@@ -22,14 +22,15 @@ jobs:
       run: |
         python -m pip install --upgrade poetry
         poetry install
-    - name: Build with nuitka
+    - name: Build with pyinstaller
       run: |
-        poetry run python -m nuitka --onefile --assume-yes-for-downloads --include-package PIL --windows-icon-from-ico logo.ico --remove-output -o Yuki-YaYa.exe main.py
+        poetry run pyinstaller --clean -i logo.ico --onefile --noconfirm --name Yuki-YaYa main.py
+
     - name: 發布 Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
-          ./*.exe
+          ./dist/*.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
