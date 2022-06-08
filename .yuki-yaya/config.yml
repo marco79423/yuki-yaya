@@ -8,3 +8,4 @@ output:
   max_height: 1440
 
   to_jpg: true
+  to_webp: true

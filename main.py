@@ -16,22 +16,29 @@ DEFAULT_CONFIG = {
         'max_width': 1440,
         'max_height': 1440,
         'to_jpg': True,
+        'to_webp': True,
     }
 }
 
 
 def run():
-    current_folder = get_current_folder()
-
     config = load_config()
+    if config.output.to_jpg:
+        generate_output(config, target_format='jpg')
+    if config.output.to_webp:
+        generate_output(config, target_format='webp')
+    print('Ya Ya！')
 
+
+def generate_output(config, target_format):
     # 建立對應的資料夾
+    current_folder = get_current_folder()
     target_folder = current_folder / '輸出'
     target_folder.makedirs_p()
 
     # 改名和轉格式順便移除層性
     for image_path in list_all_image_path_from_folder(current_folder):
-        target_image_path = target_folder / f'{image_path.stem}.jpg'
+        target_image_path = target_folder / f'{image_path.stem}.{target_format}'
         print(f'{image_path} to {target_image_path} ...', end=' ')
 
         with Image.open(image_path) as im:
@@ -54,14 +61,13 @@ def run():
                 im.thumbnail((int(width * radio), int(height * radio)), Image.ANTIALIAS)
 
             # 因為 JPG 不支援透明，要存為 JPG 就必須所以要轉為 RGB
-            if im.mode in ('RGBA', 'P'):
+            if target_format == 'jpg' and im.mode in ('RGBA', 'P'):
                 im = im.convert("RGB")
 
             # 調整檔案大小
             save_image_smaller_than(im, target_image_path, config.output.max_size)
 
         print('ok')
-    print('Ya Ya！')
 
 
 def get_current_folder() -> path.Path:
