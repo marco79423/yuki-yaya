@@ -44,7 +44,7 @@ def generate_output(config, target_format):
         with Image.open(image_path) as im:
             # 加上 logo 浮水印 (如果有的話)
             if config.logo.enabled:
-                logo_path = current_folder / config.logo.filepath
+                logo_path = current_folder / '.yuki-yaya' / config.logo.filepath
                 if logo_path.exists():
                     with Image.open(logo_path) as logo_im:
                         im = add_logo_image(im, logo_im)
